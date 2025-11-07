@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Xelar — Home</title>
+  <link rel="stylesheet" href="style.css" />
+  <script src="main.js" defer></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+</head>
+<body>
+  <div class="insta-container">
+    <!-- Stories -->
+    <div class="stories">
+      <div class="story"><img src="images/kunypp.png" alt="Kuny"><span>Kuny</span></div>
+      <div class="story"><img src="images/astra.jpg" alt="Astra"><span>Astra</span></div>
+      <div class="story"><img src="images/kuny.jpg" alt="Nova"><span>Nova</span></div>
+    </div>
+
+    <!-- Feed -->
+    <div class="feed">
+      <div class="post-card">
+        <div class="post-header">
+          <img src="images/kunypp.png" class="mini-avatar" alt="Kuny">
+          <span class="username">kuny137</span>
+        </div>
+        <img src="images/astra.jpg" class="post-img" alt="Post">
+        <div class="post-actions">
+          <button onclick="toggleLike(this)">🤍</button>
+          <span class="like-count">24 j’aime</span>
+        </div>
+        <p class="post-caption">Premier test de Xelar 🌌 #newworld</p>
+      </div>
+    </div>
+
+    <!-- Connexion -->
+    <div class="login-box">
+      <h2>Connexion</h2>
+      <form onsubmit="handleLogin(); return false;">
+        <input type="email" placeholder="Adresse e-mail" required />
+        <input type="password" placeholder="Mot de passe" required />
+        <button type="submit">Se connecter</button>
+        <a href="pages/register.html">Créer un nouveau compte</a>
+      </form>
+    </div>
+  </div>
+
+  <footer>
+    <p>© 2025 Xelar — by Kuny137</p>
+  </footer>
+</body>
+</html>

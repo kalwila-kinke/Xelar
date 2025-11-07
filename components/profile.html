@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xelar – Mon Profil</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/galaxy-style.css" />
+</head>
+<body onload="loadProfile()">
+
+  <div class="container">
+    <h2>👤 Mon Profil</h2>
+    <div id="myProfile"></div>
+
+    <h3>📚 Mes publications</h3>
+    <div id="myPosts"></div>
+  </div>
+
+  <nav class="nav-bar">
+    <button onclick="location.href='index.html'">🏠</button>
+    <button onclick="location.href='chat.html'">💬</button>
+    <button onclick="location.href='search.html'">🔍</button>
+    <button onclick="location.href='profile.html'">👤</button>
+    <button onclick="logout()">🚪</button>
+  </nav>
+
+  <script>
+    function loadProfile() {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      if (!user) return location.href = "login.html";
+
+      const container = document.getElementById("myProfile");
+      container.innerHTML = `
+        <div style="text-align:center;">
+          <img id="userPhoto" src="${user.photo}" class="avatar-large" /><br>
+          <h3>${user.name}<br><small>@${user.username}</small></h3>
+        </div>
+
+        <div style="text-align:center; margin-top:0.5rem;">
+          <input type="file" id="newPhoto" accept="image/*" onchange="changerPhoto()" />
+          <button onclick="exporterBase()">💾 Exporter les utilisateurs</button>
+        </div>
+
+        <p><strong>Adresse :</strong> ${user.adresse || ""}, ${user.ville || ""}, ${user.province || ""}</p>
+        <p><strong>Téléphone :</strong> ${user.telephone || ""}</p>
+      `;
+
+      loadMyPosts(user.username);
+    }
+
+    function loadMyPosts(username) {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const posts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+      const myPosts = posts.filter(p => p.user === username);
+      const container = document.getElementById("myPosts");
+
+      container.innerHTML = myPosts.map(post => {
+        const hasLiked = post.likes.includes(user.username);
+        const postId = post.id;
+        return `
+          <div class="post-card" id="post-${postId}">
+            <div class="post-top">
+              <img src="${user.photo}" class="avatar" />
+              <div>
+                <strong>${user.name}</strong><br>
+                <small>${post.time}</small>
+              </div>
+              <div style="margin-left:auto;cursor:pointer;" onclick="toggleMenu(${postId})">⋮</div>
+              <div id="menu-${postId}" class="context-menu" style="display:none;">
+                ${post.image ? `<div onclick="downloadImage('${post.image}')">📥 Télécharger</div>` : ""}
+                <div onclick="markPost(${postId})">🔖 Marquer</div>
+                <div onclick="sharePost(${postId})">📤 Partager</div>
+              </div>
+            </div>
+            <p>${post.text}</p>
+            ${post.image ? `<img src="${post.image}" class="post-img" />` : ""}
+            <div class="post-actions">
+              <button onclick="toggleLike(${postId})">${hasLiked ? '💔' : '👍'} ${post.likes.length}</button>
+            </div>
+            <div class="comment-section">
+              ${post.comments.map(c => `<div><strong>${c.user}:</strong> ${c.text}</div>`).join("")}
+              <input type="text" placeholder="Ajouter un commentaire…" onkeydown="handleComment(event, ${postId})" />
+            </div>
+          </div>
+        `;
+      }).join("") || "<p style='text-align:center;color:gray;'>Aucune publication</p>";
+    }
+
+    function toggleLike(postId) {
+      const user = JSON.parse(localStorage.getItem("currentUser"));
+      const posts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+      const post = posts.find(p => p.id === postId);
+      const index = post.likes.indexOf(user.username);
+      if (index === -1) post.likes.push(user.username);
+      else post.likes.splice(index, 1);
+      localStorage.setItem("xelarPosts", JSON.stringify(posts));
+      loadProfile();
+    }
+
+    function handleComment(e, postId) {
+      if (e.key === "Enter") {
+        const user = JSON.parse(localStorage.getItem("currentUser"));
+        const posts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+        const post = posts.find(p => p.id === postId);
+        const text = e.target.value.trim();
+        if (!text) return;
+        post.comments.push({ user: user.username, text });
+        localStorage.setItem("xelarPosts", JSON.stringify(posts));
+        loadProfile();
+      }
+    }
+
+    function toggleMenu(postId) {
+      const menu = document.getElementById(`menu-${postId}`);
+      menu.style.display = menu.style.display === "block" ? "none" : "block";
+    }
+
+    function downloadImage(url) {
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = "post-image.jpg";
+      a.click();
+    }
+
+    function markPost(id) {
+      alert("⭐ Post marqué !");
+    }
+
+    function sharePost(id) {
+      const url = `${location.origin}/post.html?id=${id}`;
+      navigator.clipboard.writeText(url);
+      alert("🔗 Lien copié !");
+    }
+
+    function changerPhoto() {
+      const file = document.getElementById("newPhoto").files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        const user = JSON.parse(localStorage.getItem("currentUser"));
+        const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+        user.photo = reader.result;
+        localStorage.setItem("currentUser", JSON.stringify(user));
+        const index = users.findIndex(u => u.username === user.username);
+        if (index !== -1) {
+          users[index].photo = reader.result;
+          localStorage.setItem("xelarUsers", JSON.stringify(users));
+        }
+        document.getElementById("userPhoto").src = reader.result;
+        alert("✅ Photo mise à jour !");
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function exporterBase() {
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "xelar-utilisateurs.json";
+      a.click();
+    }
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

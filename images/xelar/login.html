@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Connexion - Xelar</title>
+  <link rel="stylesheet" href="css/galaxy-style.css" />
+</head>
+<body>
+  <div class="container">
+    <img src="../photo1.jpg" alt="Photo de profil Kinke" class="profile-pic" />
+    <h2>Bienvenue, Kinke</h2>
+    <form onsubmit="return loginUser(event)">
+      <input type="text" id="username" placeholder="Nom d'utilisateur" required />
+      <input type="password" id="password" placeholder="Mot de passe" required />
+      <button type="submit">Log In</button>
+    </form>
+  </div>
+  <script src="js/auth.js"></script>
+</body>
+</html>

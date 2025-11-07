@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xelar – Profil Ami</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body onload="loadFriendProfile()">
+
+  <div class="container">
+    <h2>👽 Profil public</h2>
+    <div id="friendProfile"></div>
+
+    <h3 style="margin-top:2rem;">📚 Publications</h3>
+    <div id="friendPosts"></div>
+  </div>
+
+  <!-- 🚀 Navigation -->
+  <nav class="nav-bar">
+    <button onclick="location.href='index.html'">🏠</button>
+    <button onclick="location.href='chat.html'">💬</button>
+    <button onclick="location.href='search.html'">🔍</button>
+    <button onclick="location.href='profile.html'">👤</button>
+    <button onclick="logout()">🚪</button>
+  </nav>
+
+  <script>
+    function loadFriendProfile() {
+      const username = new URLSearchParams(location.search).get("u");
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const u = users.find(u => u.username === username);
+
+      if (!u) return document.getElementById("friendProfile").innerHTML = "<h3>Profil introuvable</h3>";
+
+      document.getElementById("friendProfile").innerHTML = `
+        ${u.photo ? `<img src="${u.photo}" class="avatar-large" />` : ""}
+        <h3>${u.name} <small>@${u.username}</small></h3>
+        <p>${u.status}</p>
+        <p>${u.adresse}, ${u.ville}, ${u.province}</p>
+        <p>${u.codepostal}</p>
+        <p>${u.telephone}</p>
+        <div style="margin-top:1rem;">
+          <button onclick="addFriend()">➕ Ajouter comme ami</button>
+          <button onclick="directMessage()">💬 Envoyer un message</button>
+        </div>
+      `;
+
+      const allPosts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+      const friendPosts = allPosts.filter(p => p.user === username);
+      const container = document.getElementById("friendPosts");
+
+      container.innerHTML = friendPosts.map(p => `
+        <div class="post-card">
+          <p>${p.text}</p>
+          ${p.image ? `<img src="${p.image}" class="post-img" />` : ""}
+          <small>${p.time}</small>
+        </div>
+      `).join("") || "<p style='color:#888;'>Aucune publication</p>";
+    }
+
+    function addFriend() {
+      const target = new URLSearchParams(location.search).get("u");
+      const current = JSON.parse(localStorage.getItem("currentUser"));
+      if (!current.friends) current.friends = [];
+      if (!current.friends.includes(target)) {
+        current.friends.push(target);
+        localStorage.setItem("currentUser", JSON.stringify(current));
+        alert("✅ Ami ajouté !");
+      } else {
+        alert("ℹ️ Cet utilisateur est déjà ton ami.");
+      }
+    }
+
+    function directMessage() {
+      const target = new URLSearchParams(location.search).get("u");
+      localStorage.setItem("chatTarget", target);
+      location.href = "chat.html";
+    }
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

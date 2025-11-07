@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🌐 Plan Xelar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/galaxy-style.css">
+  <style>
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .grid-item {
+      background: #001a33;
+      border-radius: 8px;
+      padding: 1rem;
+      text-align: center;
+      box-shadow: 0 0 8px #00ffcc44;
+      transition: 0.3s;
+    }
+    .grid-item:hover {
+      background: #003355;
+      box-shadow: 0 0 12px #00ffcc99;
+    }
+    .grid-item a {
+      color: #00ffcc;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🛰️ Tableau de Bord Xelar</h2>
+    <p style="text-align:center; color:#ccc;">Accès rapide à toutes les pages de ton univers</p>
+
+    <div class="grid">
+      <div class="grid-item"><a href="login.html">🔐 Connexion</a></div>
+      <div class="grid-item"><a href="register.html">🆕 Inscription</a></div>
+      <div class="grid-item"><a href="index.html">🏠 Accueil</a></div>
+      <div class="grid-item"><a href="profile.html">👤 Mon Profil</a></div>
+      <div class="grid-item"><a href="chat.html">💬 Chat</a></div>
+      <div class="grid-item"><a href="search.html">🔍 Recherche</a></div>
+      <div class="grid-item"><a href="friend-profile.html?u=admin">👽 Profil Ami</a></div>
+      <div class="grid-item"><a href="admin-dashboard.html">🛠️ Admin Dashboard</a></div>
+      <div class="grid-item"><a href="css/galaxy-style.css">🎨 Style CSS</a></div>
+    </div>
+  </div>
+
+</body>
+</html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Xelar – Recherche</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="css/galaxy-style.css" />
+  <style>
+    #suggestions .story-item {
+      padding: 0.5rem;
+      border-bottom: 1px solid #033;
+      cursor: pointer;
+    }
+    #suggestions .story-item:hover {
+      background-color: #002a3d;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h2>🔍 Recherche d'utilisateurs</h2>
+    <input type="text" id="searchInput" placeholder="Tape un nom ou @pseudo…" />
+    <div id="suggestions"></div>
+  </div>
+
+  <!-- 🚀 Navigation -->
+  <nav class="nav-bar">
+    <button onclick="location.href='index.html'">🏠</button>
+    <button onclick="location.href='chat.html'">💬</button>
+    <button onclick="location.href='search.html'">🔍</button>
+    <button onclick="location.href='profile.html'">👤</button>
+    <button onclick="logout()">🚪</button>
+  </nav>
+
+  <script>
+    const input = document.getElementById("searchInput");
+    const box = document.getElementById("suggestions");
+    const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+
+    input.addEventListener("input", () => {
+      const val = input.value.toLowerCase().trim();
+      if (val === "") return (box.innerHTML = "");
+      const results = users.filter(u =>
+        u.name.toLowerCase().includes(val) || u.username.toLowerCase().includes(val)
+      );
+
+      box.innerHTML = results.map(u => `
+        <div class="story-item" onclick="location.href='friend-profile.html?u=${u.username}'">
+          ${u.photo ? `<img src="${u.photo}" class="story-img">` : ""}
+          <strong>${u.name}</strong><br><small>@${u.username} – ${u.ville}</small>
+        </div>
+      `).join("") || "<p style='color:#ccc;'>Aucun résultat</p>";
+    });
+
+    function logout() {
+      localStorage.removeItem("currentUser");
+      location.href = "login.html";
+    }
+  </script>
+</body>
+</html>

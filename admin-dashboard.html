@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🛠️ Admin Xelar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/galaxy-style.css">
+  <style>
+    .stat-box {
+      background: #001a33;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px #00ffcc55;
+      text-align: center;
+    }
+    .stat-box h3 {
+      margin: 0;
+      font-size: 2rem;
+      color: #00ffcc;
+    }
+    .stat-box small {
+      color: #ccc;
+    }
+    .user-list {
+      background: #0a0a1e;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .user-item {
+      border-bottom: 1px solid #003;
+      padding: 0.5rem 0;
+    }
+  </style>
+</head>
+<body onload="loadAdmin()">
+
+  <div class="container">
+    <h2>🛠️ Tableau de Bord Admin</h2>
+
+    <div class="stat-box">
+      <h3 id="userCount">0</h3>
+      <small>Utilisateurs enregistrés</small>
+    </div>
+
+    <div class="stat-box">
+      <h3 id="postCount">0</h3>
+      <small>Publications totales</small>
+    </div>
+
+    <div class="stat-box">
+      <h3 id="messageCount">0</h3>
+      <small>Messages échangés</small>
+    </div>
+
+    <button onclick="exporterBase()">💾 Exporter les utilisateurs</button>
+
+    <h3 style="margin-top:2rem;">👥 Derniers inscrits</h3>
+    <div class="user-list" id="userList"></div>
+  </div>
+
+  <script>
+    function loadAdmin() {
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const posts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+      const messages = JSON.parse(localStorage.getItem("xelarMessages") || "[]");
+
+      document.getElementById("userCount").innerText = users.length;
+      document.getElementById("postCount").innerText = posts.length;
+      document.getElementById("messageCount").innerText = messages.length;
+
+      const list = document.getElementById("userList");
+      list.innerHTML = users.slice(-5).reverse().map(u => `
+        <div class="user-item">
+          <strong>${u.name}</strong> <small>@${u.username}</small><br>
+          <small>${u.ville}, ${u.province}</small>
+        </div>
+      `).join("") || "<p style='color:#888;'>Aucun utilisateur</p>";
+    }
+
+    function exporterBase() {
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "xelar-utilisateurs.json";
+      a.click();
+    }
+  </script>
+</body>
+</html><!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>🛠️ Admin Xelar</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/galaxy-style.css">
+  <style>
+    .stat-box {
+      background: #001a33;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      box-shadow: 0 0 8px #00ffcc55;
+      text-align: center;
+    }
+    .stat-box h3 {
+      margin: 0;
+      font-size: 2rem;
+      color: #00ffcc;
+    }
+    .stat-box small {
+      color: #ccc;
+    }
+    .user-list {
+      background: #0a0a1e;
+      padding: 1rem;
+      border-radius: 10px;
+    }
+    .user-item {
+      border-bottom: 1px solid #003;
+      padding: 0.5rem 0;
+    }
+  </style>
+</head>
+<body onload="loadAdmin()">
+
+  <div class="container">
+    <h2>🛠️ Tableau de Bord Admin</h2>
+
+    <div class="stat-box">
+      <h3 id="userCount">0</h3>
+      <small>Utilisateurs enregistrés</small>
+    </div>
+
+    <div class="stat-box">
+      <h3 id="postCount">0</h3>
+      <small>Publications totales</small>
+    </div>
+
+    <div class="stat-box">
+      <h3 id="messageCount">0</h3>
+      <small>Messages échangés</small>
+    </div>
+
+    <button onclick="exporterBase()">💾 Exporter les utilisateurs</button>
+
+    <h3 style="margin-top:2rem;">👥 Derniers inscrits</h3>
+    <div class="user-list" id="userList"></div>
+  </div>
+
+  <script>
+    function loadAdmin() {
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const posts = JSON.parse(localStorage.getItem("xelarPosts") || "[]");
+      const messages = JSON.parse(localStorage.getItem("xelarMessages") || "[]");
+
+      document.getElementById("userCount").innerText = users.length;
+      document.getElementById("postCount").innerText = posts.length;
+      document.getElementById("messageCount").innerText = messages.length;
+
+      const list = document.getElementById("userList");
+      list.innerHTML = users.slice(-5).reverse().map(u => `
+        <div class="user-item">
+          <strong>${u.name}</strong> <small>@${u.username}</small><br>
+          <small>${u.ville}, ${u.province}</small>
+        </div>
+      `).join("") || "<p style='color:#888;'>Aucun utilisateur</p>";
+    }
+
+    function exporterBase() {
+      const users = JSON.parse(localStorage.getItem("xelarUsers") || "[]");
+      const blob = new Blob([JSON.stringify(users)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "xelar-utilisateurs.json";
+      a.click();
+    }
+  </script>
+</body>
+</html>

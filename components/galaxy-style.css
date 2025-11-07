@@ -1,0 +1,271 @@
+/* --------------------
+  BASE
+--------------------- */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background: linear-gradient(to bottom, #000015, #001133);
+  color: #eee;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background: #0a0a1e;
+  box-shadow: 0 0 20px #002;
+  border-radius: 12px;
+}
+
+h2, h3 {
+  color: #00cfff;
+  text-align: center;
+}
+
+/* --------------------
+  FORMULAIRES ET BOUTONS
+--------------------- */
+form {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+
+input, textarea, select, button {
+  padding: 0.6rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #001c33;
+  color: #fff;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #00cfff;
+  background: #002d4d;
+}
+
+button {
+  background: #0066aa;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background: #00cfff;
+}
+
+a {
+  color: #00cfff;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --------------------
+  POSTS
+--------------------- */
+.post-card {
+  background: #002244;
+  border-radius: 8px;
+  padding: 1rem;
+  margin-top: 1rem;
+  box-shadow: 0 0 8px #001020;
+}
+
+.post-card img {
+  max-width: 100%;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+
+.facebook-post-box {
+  background: #001a33;
+  padding: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 10px #000c;
+  margin-bottom: 1rem;
+}
+
+.post-header {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-bottom: 1rem;
+}
+
+.facebook-post-box textarea {
+  flex: 1;
+  border: none;
+  resize: none;
+  background: #002244;
+  color: white;
+  padding: 0.75rem;
+  border-radius: 10px;
+  font-size: 1rem;
+  height: 80px;
+}
+
+.post-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.post-actions input[type="file"] {
+  color: white;
+}
+
+/* --------------------
+  PROFIL
+--------------------- */
+.profile-box {
+  background: #001a33;
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 0 8px #000a;
+  text-align: center;
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.profile-box img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 0.5rem;
+}
+
+/* --------------------
+  STORIES
+--------------------- */
+.story-img {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #00ffff;
+}
+
+.story-item {
+  display: inline-block;
+  margin-right: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+
+/* --------------------
+  CHAT
+--------------------- */
+#chatBox p {
+  margin: 0.4rem 0;
+  padding: 0.4rem;
+  background: #002244;
+  border-radius: 6px;
+}
+
+/* --------------------
+  NOTIFICATION
+--------------------- */
+.notif-bar {
+  background: #00ffcc;
+  color: #000;
+  padding: 0.75rem;
+  text-align: center;
+  font-weight: bold;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  border-bottom: 3px solid #0088cc;
+}
+
+/* --------------------
+  NAVIGATION
+--------------------- */
+.nav-bar {
+  position: fixed;
+  width: 100%;
+  bottom: 0;
+  background: #001933;
+  display: flex;
+  justify-content: space-around;
+  padding: 0.5rem 0;
+  box-shadow: 0 -1px 5px #000;
+  z-index: 999;
+}
+
+.nav-bar button {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  color: #00cfff;
+  cursor: pointer;
+}
+
+/* Barre du haut sur écran large */
+@media (min-width: 700px) {
+  .nav-bar {
+    top: 0;
+    bottom: unset;
+  }
+}
+
+/* --------------------
+  RESPONSIVE
+--------------------- */
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  input, textarea, button {
+    font-size: 0.95rem;
+  }
+}
+/* === MODE CLAIR pour login.html === */
+body.light-mode {
+  background: linear-gradient(to bottom, #ffffff, #e0f3ff);
+  color: #111;
+}
+
+body.light-mode .container {
+  background: #f4fbff;
+  color: #111;
+  box-shadow: 0 0 20px #88ccff55;
+}
+
+body.light-mode input,
+body.light-mode button {
+  background: #ffffff;
+  color: #000;
+}
+
+body.light-mode input:focus {
+  background: #f0faff;
+}
+
+body.light-mode .notif-bar {
+  background: #0077bb;
+  color: white;
+}
+
+#currentUserPhoto{
+  clip-path: circle(50%);
+  width: 50px;
+  
+}
+#userPhoto {
+  clip-path: circle(50%);
+  width: 100px;
+  height: 100px;
+}

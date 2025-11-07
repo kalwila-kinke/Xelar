@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Messages — Xelar</title>
+  <link rel="stylesheet" href="../style.css" />
+  <script src="../main.js" defer></script>
+</head>
+<body>
+  <div class="messenger">
+    <!-- Liste des contacts -->
+    <aside class="sidebar">
+      <h2>Discussions</h2>
+      <ul>
+        <li class="active">
+          <img src="../assets/images/friend-avatar.png" alt="Astra" />
+          <span>AstraNova</span>
+        </li>
+        <li>
+          <img src="../assets/images/avatar.png" alt="Nova" />
+          <span>Nova</span>
+        </li>
+        <li>
+          <img src="../assets/images/avatar.png" alt="Zara" />
+          <span>Zara</span>
+        </li>
+      </ul>
+    </aside>
+
+    <!-- Fenêtre de chat -->
+    <section class="chat-window">
+      <div class="chat-header">
+        <img src="../assets/images/friend-avatar.png" />
+        <h3>AstraNova</h3>
+      </div>
+
+      <div class="chat-body">
+        <div class="message">Astra : Yo Kuny 💫</div>
+        <div class="message from-me">Kuny : Toujours en orbite, bro 🛸</div>
+        <div class="message">Astra : T'as codé ça sérieusement 😳</div>
+      </div>
+
+      <form class="chat-input" onsubmit="return false;">
+        <input type="text" placeholder="Écris un message..." />
+        <button type="submit">Envoyer</button>
+        <nav class="bottom-nav">
+  <a href="../index.html">🏠</a>
+  <a href="messages.html">💬</a>
+  <a href="profile.html" class="active">👤</a>
+  <a href="login.html">🚪</a>
+</nav>
+      </form>
+    </section>
+  </div>
+</body>
+</html>

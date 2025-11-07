@@ -1,0 +1,87 @@
+/* Police et couleurs générales */
+body {
+  background-color: #0d0d0d;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* Conteneur central des pages */
+.container {
+  background-color: #111;
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0 0 20px #00aaff33;
+  text-align: center;
+}
+
+/* Champs de formulaire */
+input, textarea, select {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  background: #222;
+  border: none;
+  border-radius: 6px;
+  color: white;
+}
+
+/* Boutons */
+button {
+  background-color: #00aaff;
+  color: white;
+  padding: 0.7rem 1.5rem;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+
+button:hover {
+  background-color: #008ecc;
+}
+
+/* Photo de profil */
+.profile-pic {
+  border-radius: 50%;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  margin-bottom: 1rem;
+}
+
+/* Chatbox spécifique */
+.chat-box {
+  background-color: #1a1a1a;
+  border-radius: 10px;
+  padding: 1rem;
+  max-height: 300px;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.message {
+  text-align: left;
+  margin-bottom: 0.5rem;
+}
+
+.message.sent {
+  text-align: right;
+}
+#profile {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #00cfff;
+  box-shadow: 0 0 10px #0077ff66;
+  margin-bottom: 1rem;
+}

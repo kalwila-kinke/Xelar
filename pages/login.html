@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Connexion — Xelar</title>
+  <link rel="stylesheet" href="../style.css" />
+</head>
+<body onsubmit="return handleLogin()">
+  <header>
+    <div class="logo">Xelar</div>
+    <nav>
+      <a href="login.html" class="active">Connexion</a>
+      <a href="register.html">Inscription</a>
+    </nav>
+  </header>
+
+  <section class="form-section">
+    <h2>Connexion</h2>
+    <form>
+      <input type="email" placeholder="Adresse e-mail" required />
+      <input type="password" placeholder="Mot de passe" required />
+      <button type="submit">Se connecter</button>
+    </form>
+  </section>
+
+  <footer><p>© 2025 Xelar — by kuny137</p></footer>
+
+  <nav class="bottom-nav">
+    <a href="../index.html">🏠</a>
+    <a href="messages.html">💬</a>
+    <a href="profile.html">👤</a>
+    <a href="login.html">🚪</a>
+  </nav>
+
+  <script>
+  function handleLogin() {
+    const email = document.querySelector('input[type="email"]').value.toLowerCase();
+    const pwd = document.querySelector('input[type="password"]').value;
+    loginUser(email, pwd);
+    return false; // empêche l'envoi réel
+  }
+</script>
+</body>
+</html>
