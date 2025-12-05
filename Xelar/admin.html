@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xelar - Administration</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Configuration de la police Inter */
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+
+        /* Styles pour le mode sombre */
+        body.dark-mode {
+            background-color: #1a202c; /* bg-gray-900 */
+            color: #e2e8f0; /* text-gray-200 */
+        }
+        body.dark-mode .bg-white {
+            background-color: #2d3748; /* bg-gray-800 */
+            color: #e2e8f0;
+            /* Neon effect for main content blocks */
+            box-shadow: 0 0 10px rgba(138, 43, 226, 0.7), 0 0 20px rgba(75, 0, 130, 0.5), 0 0 30px rgba(0, 0, 255, 0.3);
+        }
+        body.dark-mode .bg-gray-50 {
+            background-color: #4a5568; /* bg-gray-700 */
+            color: #e2e8f0;
+        }
+        body.dark-mode .shadow-md {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5), 0 2px 4px -1px rgba(0, 0, 0, 0.3);
+        }
+        body.dark-mode .border {
+            border-color: #4a5568; /* gray-700 */
+        }
+        body.dark-mode .text-gray-700 {
+            color: #cbd5e0; /* gray-300 */
+        }
+        body.dark-mode .text-gray-800 {
+            color: #e2e8f0; /* gray-200 */
+        }
+        body.dark-mode .text-gray-900 {
+            color: #f7fafc; /* gray-100 */
+        }
+        body.dark-mode .text-gray-500 {
+            color: #a0aec0; /* gray-400 */
+        }
+        body.dark-mode .text-gray-600 {
+            color: #a0aec0; /* gray-400 */
+        }
+        body.dark-mode .hover\:bg-blue-50:hover {
+            background-color: #2c5282; /* blue-800 */
+        }
+        body.dark-mode .bg-blue-100 {
+            background-color: #2b6cb0; /* blue-700 */
+        }
+        body.dark-mode input, body.dark-mode textarea {
+            background-color: #2d3748; /* gray-800 */
+            border-color: #4a5568; /* gray-700 */
+            color: #e2e8f0;
+        }
+        body.dark-mode input::placeholder, body.dark-mode textarea::placeholder {
+            color: #a0aec0; /* gray-400 */
+        }
+        body.dark-mode .bg-gray-200 {
+            background-color: #4a5568; /* gray-700 */
+            color: #e2e8f0;
+        }
+
+        /* Neon effect for titles in dark mode */
+        body.dark-mode h1, body.dark-mode h2 {
+            text-shadow: 0 0 8px #8a2be2, 0 0 15px #4b0082, 0 0 20px #0000ff;
+        }
+
+        /* Neon effect for buttons in dark mode */
+        body.dark-mode .bg-blue-500, body.dark-mode .bg-red-500, body.dark-mode .bg-green-500, body.dark-mode #dark-mode-toggle {
+            box-shadow: 0 0 8px rgba(138, 43, 226, 0.7), 0 0 15px rgba(75, 0, 130, 0.5), 0 0 30px rgba(0, 0, 255, 0.3);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <!-- En-tête -->
+    <header class="bg-white shadow-md p-4 flex justify-between items-center">
+        <div class="flex items-center">
+            <h1 class="text-3xl font-bold text-blue-600">Xelar - Administration</h1>
+        </div>
+        <div class="flex items-center space-x-4">
+            <button id="dark-mode-toggle" class="bg-gray-700 text-white px-4 py-2 rounded-full hover:bg-gray-900 transition-colors duration-200">
+                Mode Sombre
+            </button>
+            <a href="finale.html" class="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600 transition-colors duration-200">
+                Retour au site
+            </a>
+        </div>
+    </header>
+
+    <!-- Contenu principal -->
+    <main class="container mx-auto p-4 md:p-8">
+        <section id="admin-login-area" class="bg-white rounded-lg shadow-lg p-6 mb-8 max-w-md mx-auto">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-4 text-center">Connexion Administrateur</h2>
+            <p class="text-gray-700 text-lg text-center mb-4">Connectez-vous en tant qu'administrateur pour accéder au tableau de bord.</p>
+            <div class="space-y-4">
+                <div>
+                    <label for="admin-username" class="block text-left text-gray-700 text-sm font-bold mb-2">Nom d'utilisateur Admin</label>
+                    <input type="text" id="admin-username" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="admin ou kuny137">
+                </div>
+                <div>
+                    <label for="admin-password" class="block text-left text-gray-700 text-sm font-bold mb-2">Mot de passe Admin</label>
+                    <input type="password" id="admin-password" class="shadow appearance-none border rounded-lg w-full py-3 px-4 text-gray-700 leading-tight focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="password ou knkn123">
+                </div>
+                <button id="admin-login-button" class="bg-blue-500 text-white px-6 py-3 rounded-full hover:bg-blue-600 transition-colors duration-200 shadow-md w-full">
+                    Connexion Admin
+                </button>
+                <p id="admin-login-message" class="text-red-500 text-sm text-center hidden">Nom d'utilisateur ou mot de passe incorrect.</p>
+            </div>
+        </section>
+
+        <section id="admin-dashboard-area" class="hidden">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-6">Tableau de bord Administrateur</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                <div class="bg-blue-50 p-4 rounded-lg shadow-sm text-center">
+                    <p class="text-4xl font-bold text-blue-800" id="total-users-count">0</p>
+                    <p class="text-blue-600">Utilisateurs inscrits</p>
+                </div>
+                <div class="bg-green-50 p-4 rounded-lg shadow-sm text-center">
+                    <p class="text-4xl font-bold text-green-800" id="total-posts-count">0</p>
+                    <p class="text-green-600">Publications totales</p>
+                </div>
+                <div class="bg-purple-50 p-4 rounded-lg shadow-sm text-center">
+                    <p class="text-4xl font-bold text-purple-800" id="connected-users-count">0</p>
+                    <p class="text-purple-600">Utilisateurs connectés (simulé)</p>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Gestion des utilisateurs</h3>
+                    <div id="admin-user-list" class="space-y-3">
+                        <!-- User list will be dynamically loaded here -->
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="text-2xl font-semibold text-gray-800 mb-4">Gestion des publications</h3>
+                    <div id="admin-post-list" class="space-y-3">
+                        <!-- Post list will be dynamically loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 text-center">
+                <button id="admin-logout-button" class="bg-red-500 text-white px-6 py-3 rounded-full hover:bg-red-600 transition-colors duration-200 shadow-md">
+                    Déconnexion Admin
+                </button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Pied de page -->
+    <footer class="bg-gray-800 text-white p-6 text-center mt-auto">
+        <p>&copy; 2024 Xelar - Administration. Tous droits réservés.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const body = document.body;
+            const darkModeToggle = document.getElementById('dark-mode-toggle');
+            const adminLoginArea = document.getElementById('admin-login-area');
+            const adminDashboardArea = document.getElementById('admin-dashboard-area');
+            const adminUsernameInput = document.getElementById('admin-username');
+            const adminPasswordInput = document.getElementById('admin-password');
+            const adminLoginButton = document.getElementById('admin-login-button');
+            const adminLogoutButton = document.getElementById('admin-logout-button');
+            const adminLoginMessage = document.getElementById('admin-login-message');
+            const totalUsersCount = document.getElementById('total-users-count');
+            const totalPostsCount = document.getElementById('total-posts-count');
+            const connectedUsersCount = document.getElementById('connected-users-count');
+            const adminUserList = document.getElementById('admin-user-list');
+            const adminPostList = document.getElementById('admin-post-list');
+
+            let isAdminLoggedIn = false;
+
+            // Simulated user database
+            let simulatedUsers = [
+                { name: "Utilisateur Alpha", status: "Actif", avatar: "https://placehold.co/40x40/FF7F50/FFFFFF?text=U" },
+                { name: "Utilisateur Bêta", status: "Inactif", avatar: "https://placehold.co/40x40/87CEEB/FFFFFF?text=U" },
+                { name: "Utilisateur Gamma", status: "Actif", avatar: "https://placehold.co/40x40/FFD700/000000?text=U" }
+            ];
+
+            // Simulated posts data
+            let simulatedPosts = [];
+
+            // Load data from localStorage
+            const storedSimulatedUsers = localStorage.getItem('simulatedUsers');
+            if (storedSimulatedUsers) {
+                simulatedUsers = JSON.parse(storedSimulatedUsers);
+            }
+            const storedSimulatedPosts = localStorage.getItem('simulatedPosts');
+            if (storedSimulatedPosts) {
+                simulatedPosts = JSON.parse(storedSimulatedPosts);
+            }
+
+            // Admin Login
+            adminLoginButton.addEventListener('click', () => {
+                const username = adminUsernameInput.value;
+                const password = adminPasswordInput.value;
+
+                // Hardcoded credentials for simulation
+                if ((username === 'admin' && password === 'password') || (username === 'kuny137' && password === 'knkn123')) {
+                    isAdminLoggedIn = true;
+                    adminLoginArea.classList.add('hidden');
+                    adminDashboardArea.classList.remove('hidden');
+                    adminLoginMessage.classList.add('hidden');
+                    updateAdminDashboard();
+                    console.log("Admin connecté !");
+                } else {
+                    adminLoginMessage.classList.remove('hidden');
+                    console.error("Échec de la connexion admin.");
+                }
+            });
+
+            // Admin Logout
+            adminLogoutButton.addEventListener('click', () => {
+                isAdminLoggedIn = false;
+                adminLoginArea.classList.remove('hidden');
+                adminDashboardArea.classList.add('hidden');
+                adminLoginMessage.classList.add('hidden');
+                adminUsernameInput.value = '';
+                adminPasswordInput.value = '';
+                console.log("Admin déconnecté !");
+            });
+
+            // Function to update the admin dashboard
+            const updateAdminDashboard = () => {
+                if (isAdminLoggedIn) {
+                    totalUsersCount.textContent = simulatedUsers.length;
+                    totalPostsCount.textContent = simulatedPosts.length;
+                    connectedUsersCount.textContent = Math.floor(Math.random() * 5) + 1;
+
+                    // Populate User List
+                    adminUserList.innerHTML = '';
+                    simulatedUsers.forEach(user => {
+                        const userDiv = document.createElement('div');
+                        userDiv.classList.add('flex', 'items-center', 'justify-between', 'p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
+                        userDiv.innerHTML = `
+                            <div class="flex items-center">
+                                <img src="${user.avatar}" alt="User Avatar" class="w-10 h-10 rounded-full mr-3">
+                                <div>
+                                    <p class="font-bold text-gray-900">${user.name}</p>
+                                    <p class="text-sm text-gray-600">Statut: ${user.status}</p>
+                                </div>
+                            </div>
+                            <button class="bg-red-500 text-white px-3 py-1 rounded-full text-sm hover:bg-red-600 admin-delete-user" data-username="${user.name}">
+                                Supprimer
+                            </button>
+                        `;
+                        adminUserList.appendChild(userDiv);
+                    });
+
+                    // Populate Post List
+                    adminPostList.innerHTML = '';
+                    simulatedPosts.forEach(post => {
+                        const postDiv = document.createElement('div');
+                        postDiv.classList.add('p-3', 'bg-gray-50', 'rounded-lg', 'shadow-sm');
+                        postDiv.innerHTML = `
+                            <p class="font-bold text-gray-900 mb-1">Publication par ${post.username}</p>
+                            <p class="text-sm text-gray-700 truncate">${post.textContent}</p>
+                            <div class="flex justify-between text-xs text-gray-500 mt-2">
+                                <span>Likes: ${post.likes}</span>
+                                <span>Commentaires: ${post.comments}</span>
+                                <button class="bg-red-500 text-white px-2 py-0.5 rounded-full text-xs hover:bg-red-600 admin-delete-post" data-post-id="${post.id}">
+                                    Supprimer
+                                </button>
+                            </div>
+                        `;
+                        adminPostList.appendChild(postDiv);
+                    });
+
+                    // Add event listeners for delete buttons
+                    adminUserList.addEventListener('click', (event) => {
+                        const deleteButton = event.target.closest('.admin-delete-user');
+                        if (deleteButton) {
+                            const usernameToDelete = deleteButton.dataset.username;
+                            simulatedUsers = simulatedUsers.filter(user => user.name !== usernameToDelete);
+                            localStorage.setItem('simulatedUsers', JSON.stringify(simulatedUsers));
+                            alert(`Utilisateur ${usernameToDelete} supprimé (simulation).`);
+                            updateAdminDashboard();
+                        }
+                    });
+
+                    adminPostList.addEventListener('click', (event) => {
+                        const deleteButton = event.target.closest('.admin-delete-post');
+                        if (deleteButton) {
+                            const postIdToDelete = deleteButton.dataset.postId;
+                            simulatedPosts = simulatedPosts.filter(post => post.id !== postIdToDelete);
+                            localStorage.setItem('simulatedPosts', JSON.stringify(simulatedPosts));
+                            alert(`Publication ${postIdToDelete} supprimée (simulation).`);
+                            updateAdminDashboard();
+                        }
+                    });
+                }
+            };
+
+            // Dark mode toggle
+            const toggleDarkMode = () => {
+                body.classList.toggle('dark-mode');
+                if (body.classList.contains('dark-mode')) {
+                    localStorage.setItem('theme', 'dark');
+                    darkModeToggle.textContent = 'Mode Clair';
+                    darkModeToggle.classList.remove('bg-gray-700', 'hover:bg-gray-900');
+                    darkModeToggle.classList.add('bg-blue-500', 'hover:bg-blue-600');
+                } else {
+                    localStorage.setItem('theme', 'light');
+                    darkModeToggle.textContent = 'Mode Sombre';
+                    darkModeToggle.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                    darkModeToggle.classList.add('bg-gray-700', 'hover:bg-gray-900');
+                }
+            };
+
+            // Apply saved theme
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'dark') {
+                body.classList.add('dark-mode');
+                darkModeToggle.textContent = 'Mode Clair';
+                darkModeToggle.classList.remove('bg-gray-700', 'hover:bg-gray-900');
+                darkModeToggle.classList.add('bg-blue-500', 'hover:bg-blue-600');
+            } else {
+                darkModeToggle.textContent = 'Mode Sombre';
+                darkModeToggle.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+                darkModeToggle.classList.add('bg-gray-700', 'hover:bg-gray-900');
+            }
+
+            darkModeToggle.addEventListener('click', toggleDarkMode);
+
+            // Initial load
+            updateAdminDashboard();
+        });
+    </script>
+</body>
+</html>
