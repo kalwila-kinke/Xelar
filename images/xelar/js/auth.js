@@ -1,19 +1,7 @@
-// Données utilisateur fixes (local uniquement pour test)
-const user = {
-  username: "kinke",
-  password: "kuny137$KN",
-  phone: "+243976593482"
-};
+// auth.js
 
-function loginUser(event) {
-  event.preventDefault();
-  const inputUsername = document.getElementById("username").value.toLowerCase();
-  const inputPassword = document.getElementById("password").value;
+// Sample content: Replace Xelar with Anix
 
-  if (inputUsername === user.username && inputPassword === user.password) {
-    alert(`Bienvenue ${user.username.toUpperCase()} ! 📱 Tel: ${user.phone}`);
-    window.location.href = "index.html";
-  } else {
-    alert("Identifiants incorrects ❌");
-  }
-}
+console.log('This is an example for Xelar.');
+
+// More code...
